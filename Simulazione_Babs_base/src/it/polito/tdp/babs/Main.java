@@ -13,7 +13,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
-			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Babs.fxml")) ;
 			BorderPane root = (BorderPane)loader.load();
 			
@@ -25,7 +24,6 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
