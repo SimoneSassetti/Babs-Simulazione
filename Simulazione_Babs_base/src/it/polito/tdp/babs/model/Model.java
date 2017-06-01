@@ -23,7 +23,6 @@ public class Model {
 
 	public List<Statistics> getStats(LocalDate ld){
 		List<Statistics> stats=new ArrayList<Statistics>();
-		
 		for(Station s: this.getStazioni()){
 			int pick=dao.getPickNumber(s,ld);
 			int drop=dao.getDropNumber(s,ld);

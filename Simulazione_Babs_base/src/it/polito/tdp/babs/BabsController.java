@@ -20,27 +20,22 @@ import javafx.scene.control.TextArea;
 public class BabsController {
 
 	private Model model;
-
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
+	
 	@FXML
 	private ResourceBundle resources;
-
 	@FXML
 	private URL location;
-
 	@FXML
 	private DatePicker pickData;
-
 	@FXML
 	private Slider sliderK;
-
 	@FXML
 	private TextArea txtResult;
-
 	@FXML
+	
 	void doContaTrip(ActionEvent event) {
 		txtResult.clear();
 		
@@ -55,8 +50,10 @@ public class BabsController {
 		for(Statistics s: stats){
 			if(s.getPick()<=0)//dovrei controllare anche i drop
 				txtResult.appendText(String.format("WARNING: Stazione %s con 0 pick\n", s.getStazione().getName()));
+			else if(s.getDrop()<=0)
+				txtResult.appendText(String.format("WARNING: Stazione %s con 0 drop\n", s.getStazione().getName()));
 			else
-				txtResult.appendText(String.format("%s %d %d\n",s.getStazione().getName(),s.getPick(),s.getDrop()));
+				txtResult.appendText(String.format("(%f) %s %d %d\n",s.getStazione().getLat(),s.getStazione().getName(),s.getPick(),s.getDrop()));
 		}
 	}
 
@@ -70,7 +67,6 @@ public class BabsController {
 			return;
 		}
 		double k=(double)sliderK.getValue()/100.0;
-		
 		
 		List<Trip> tripsPick=model.getTripsWithPickForDate(ld);
 		List<Trip> tripsDrop=model.getTripsWithDropForDate(ld);
@@ -90,7 +86,7 @@ public class BabsController {
 		assert pickData != null : "fx:id=\"pickData\" was not injected: check your FXML file 'Babs.fxml'.";
 		assert sliderK != null : "fx:id=\"sliderK\" was not injected: check your FXML file 'Babs.fxml'.";
 		assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Babs.fxml'.";
-
+		
 		pickData.setValue(LocalDate.of(2013, 9, 1));
 	}
 }

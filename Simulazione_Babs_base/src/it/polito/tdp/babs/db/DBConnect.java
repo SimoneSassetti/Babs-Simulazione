@@ -2,7 +2,9 @@ package it.polito.tdp.babs.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import javax.sql.DataSource;
+
 import com.mchange.v2.c3p0.DataSources;
 
 public class DBConnect {
@@ -22,7 +24,6 @@ public class DBConnect {
 				System.exit(1);
 			}
 		}
-
 		try {
 			Connection c = ds.getConnection();
 			return c;

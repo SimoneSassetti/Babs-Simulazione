@@ -32,8 +32,8 @@ public class Statistics implements Comparable<Statistics>{
 	}
 	@Override
 	public int compareTo(Statistics s1) {
-		return Double.compare(this.stazione.getLat(), s1.getStazione().getLat());
-	}
-	
-		
+		/*return Double.compare(this.stazione.getLat(), s1.getStazione().getLat());
+		in questo modo CREDO che ordini in maniera crescente. noi vogliamo l'ordine DECRESCENTE*/
+		return Double.compare(s1.getStazione().getLat(),this.stazione.getLat());
+	}	
 }

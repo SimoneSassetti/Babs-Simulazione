@@ -15,7 +15,7 @@ public class TestDAO {
 		List<Station> stations = dao.getAllStations();
 
 		for (Station s : stations) {
-			//System.out.format("%2d %-20s\n", s.getStationID(), s.getName());
+			System.out.format("%2d %-20s\n", s.getStationID(), s.getName());
 		}
 
 		List<Trip> trips = dao.getAllTrips();

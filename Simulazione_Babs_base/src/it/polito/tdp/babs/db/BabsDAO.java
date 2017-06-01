@@ -33,7 +33,6 @@ public class BabsDAO {
 			e.printStackTrace();
 			throw new RuntimeException("Error in database query", e);
 		}
-
 		return result;
 	}
 
@@ -58,7 +57,6 @@ public class BabsDAO {
 			e.printStackTrace();
 			throw new RuntimeException("Error in database query", e);
 		}
-
 		return result;
 	}
 
@@ -73,7 +71,6 @@ public class BabsDAO {
 			st.setInt(2, s.getStationID());
 			ResultSet rs = st.executeQuery();
 
-			//NON METTO UN IF xk cosi se è 0 che c'è un errore e lo visualizzo
 			if(rs.next())
 				result=rs.getInt("counter");
 			
@@ -99,7 +96,6 @@ public class BabsDAO {
 			st.setInt(2, s.getStationID());
 			ResultSet rs = st.executeQuery();
 
-			//NON METTO UN IF xk cosi se è 0 che c'è un errore e lo visualizzo
 			if(rs.next())
 				result=rs.getInt("counter");
 			
@@ -110,7 +106,6 @@ public class BabsDAO {
 			e.printStackTrace();
 			throw new RuntimeException("Error in database query", e);
 		}
-		
 		return result;
 	}
 
