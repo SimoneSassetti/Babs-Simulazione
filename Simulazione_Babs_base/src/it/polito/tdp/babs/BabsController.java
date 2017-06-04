@@ -48,7 +48,7 @@ public class BabsController {
 		Collections.sort(stats);
 		
 		for(Statistics s: stats){
-			if(s.getPick()<=0)//dovrei controllare anche i drop
+			if(s.getPick()<=0)
 				txtResult.appendText(String.format("WARNING: Stazione %s con 0 pick\n", s.getStazione().getName()));
 			else if(s.getDrop()<=0)
 				txtResult.appendText(String.format("WARNING: Stazione %s con 0 drop\n", s.getStazione().getName()));
@@ -74,10 +74,11 @@ public class BabsController {
 		Simulazione simulazione=new Simulazione();
 		simulazione.loadPick(tripsPick);
 		simulazione.loadDrop(tripsDrop);
-		simulazione.loadStation(k);
-		simulazione.run();
-		simulazione.collectResult();
-		
+		simulazione.loadStation(k, model.getStazioni());
+		simulazione.run(model.getStazioni());
+	
+		txtResult.appendText("Numero di PRESE MANCATE: "+simulazione.collectResult().getNumberOfPickMiss()+"\n");	
+		txtResult.appendText("Numero di RITORNI MANCATI: "+simulazione.collectResult().getNumberOfDropMiss()+"\n");	
 		
 	}
 

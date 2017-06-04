@@ -132,9 +132,7 @@ public class BabsDAO {
 			e.printStackTrace();
 			throw new RuntimeException("Error in database query", e);
 		}
-
 		return result;
-
 	}
 	public List<Trip> getTripsForDayDrop(LocalDate ld) {
 		List<Trip> result = new LinkedList<Trip>();

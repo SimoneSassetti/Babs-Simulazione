@@ -16,10 +16,5 @@ public class SimulationResult {
 	}
 	public void setNumberOfDropMiss(int numberOfDropMiss) {
 		this.numberOfDropMiss = numberOfDropMiss;
-	}
-	
-	
-	
-	
-	
+	}	
 }

@@ -8,7 +8,6 @@ public class Trip {
 	private int duration;
 	private LocalDateTime startDate;
 	private int startStationID;
-
 	private LocalDateTime endDate;
 	private int endStationID;
 
