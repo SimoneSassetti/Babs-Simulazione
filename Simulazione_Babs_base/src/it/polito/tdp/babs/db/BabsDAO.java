@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.Map;
 
 public class BabsDAO {
 
@@ -108,7 +109,56 @@ public class BabsDAO {
 		}
 		return result;
 	}
+	
+	//versione con il group by
+	public Map<Integer, Integer> getStationWithPick(LocalDate ld) {
+		Map<Integer,Integer> result=new TreeMap<Integer,Integer>();
+		
+		Connection conn = DBConnect.getConnection();
+		String sql="SELECT StartTerminal,count(*) as counter from trip where DATE(StartDate)=? group by StartTerminal";
+		
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setDate(1, Date.valueOf(ld));
+			ResultSet rs = st.executeQuery();
 
+			while(rs.next())
+				result.put(rs.getInt("StartTerminal"), rs.getInt("counter"));
+			
+			st.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error in database query", e);
+		}
+		return result;
+	}
+	
+	public Map<Integer, Integer> getStationWithDrop(LocalDate ld) {
+		Map<Integer,Integer> result=new TreeMap<Integer,Integer>();
+		
+		Connection conn = DBConnect.getConnection();
+		String sql="SELECT EndTerminal,count(*) as counter from trip where DATE(EndDate)=? group by EndTerminal";
+		
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setDate(1, Date.valueOf(ld));
+			ResultSet rs = st.executeQuery();
+
+			while(rs.next())
+				result.put(rs.getInt("EndTerminal"), rs.getInt("counter"));
+			
+			st.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error in database query", e);
+		}
+		return result;
+	}
+	
 	//CARICANO GLI EVENTI X LA  MIA SIMULAZIONE
 	public List<Trip> getTripsForDayPick(LocalDate ld) {
 		List<Trip> result = new LinkedList<Trip>();

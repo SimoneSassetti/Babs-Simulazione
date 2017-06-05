@@ -45,6 +45,8 @@ public class BabsController {
 			return;
 		}
 		List<Statistics> stats=model.getStats(ld);
+		//List<Statistics> stats=model.getStatisticheOttimizzato(ld);
+		
 		Collections.sort(stats);
 		
 		for(Statistics s: stats){
@@ -69,17 +71,19 @@ public class BabsController {
 		double k=(double)sliderK.getValue()/100.0;
 		
 		List<Trip> tripsPick=model.getTripsWithPickForDate(ld);
-		List<Trip> tripsDrop=model.getTripsWithDropForDate(ld);
+		//List<Trip> tripsDrop=model.getTripsWithDropForDate(ld);
 		
-		Simulazione simulazione=new Simulazione();
+		Simulazione simulazione=new Simulazione(model);
 		simulazione.loadPick(tripsPick);
-		simulazione.loadDrop(tripsDrop);
+		
+		//potrebbe falsare il risulato della simulazione VEDI SIMULAZIONE
+		//simulazione.loadDrop(tripsDrop);
+		
 		simulazione.loadStation(k, model.getStazioni());
-		simulazione.run(model.getStazioni());
+		simulazione.run();
 	
 		txtResult.appendText("Numero di PRESE MANCATE: "+simulazione.collectResult().getNumberOfPickMiss()+"\n");	
-		txtResult.appendText("Numero di RITORNI MANCATI: "+simulazione.collectResult().getNumberOfDropMiss()+"\n");	
-		
+		txtResult.appendText("Numero di RITORNI MANCATI: "+simulazione.collectResult().getNumberOfDropMiss()+"\n");		
 	}
 
 	@FXML
